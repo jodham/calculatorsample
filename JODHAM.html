@@ -38,10 +38,24 @@
 	#del{
 		width: 100%;
 	}
+	#con{
+		width: 100%;
+	}
+
+	#conversiondiv{
+		width: 90%;
+		height: 90vh;
+		background-color: #cecece;
+		position: fixed;
+		left: 5%;
+		top: 5%;
+		display: none;
+
+	}
 	</style>
 
 </head>
-<body>
+<body onload="loadcalledconversion();">
 <div class ="wrap">
 	<form name="cal">
 		<input type="text" name="display">
@@ -67,8 +81,52 @@
 		<input type="button" value="=" onclick="cal.display.value =eval(cal.display.value)">
 		<br><br>
 		<input type="button" value="DELETE" onclick="cal.display.value= ''" id ="del"><br><br>
-		<input type="button" value="Conversion" onclick="cal.display.value= ''" id ="del">
+		<input type="button" value="Conversion" onclick="cal.display.value= ''" id ="con">
 	</form>
 </div>
+<br>
+<div id="conversiondiv">
+	<button id="btnclose">Close</button>
+</div>
 </body>
+
+<script type="text/javascript">
+	callconversion();
+	closeconversion();
+	function callconversion() {
+		let conform = document.getElementById('conversiondiv');
+		let btnconform = document.getElementById('con');
+		
+		btnconform.addEventListener('click', ()=>{
+			
+				conform.style.display = "block";
+				localStorage.setItem('conindex', 1);
+		})
+
+	}
+	function loadcalledconversion(){
+		let conform = document.getElementById('conversiondiv');
+		let callconversioninde = localStorage.getItem('conindex');
+		callconversioninde = parseInt(callconversioninde);
+		if (callconversioninde == 1) {
+			conform.style.display = "block";
+		}else if(callconversioninde == 0){
+			conform.style.display = "none";
+		}else{
+			localStorage.setItem('conindex', 0);
+		}
+		
+	}
+	function closeconversion() {
+		let conform = document.getElementById('conversiondiv');
+		let btncloseform = document.getElementById('btnclose');
+		
+		btncloseform.addEventListener('click', ()=>{
+			
+				conform.style.display = "none";
+				localStorage.setItem('conindex', 0);
+		})
+
+	}
+</script>
 </html>
