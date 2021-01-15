@@ -76,6 +76,13 @@
 		padding: 10px 8px;
 		
 	}
+	.closeconversionpane{
+		padding: 10px  8px ;
+		background: crimson;
+		width: 30%;
+		border-radius: 10px;
+		margin: 2px;
+	}
 	</style>
 
 </head>
@@ -110,14 +117,27 @@
 </div>
 <br>
 <div id="conversiondiv">
-	<button id="btnclose">Close</button>
+	<button id="btnclose" class="closeconversionpane">Close</button>
 	<div id="selectedconmode">
 		<br>
 		<center>
-		<a href="#" class="active">MASS</a>
-		<a href="#">DISTANCE</a>
-		<a href="#">SPEED</a>
+		<a href="#" id="callmassconversion">MASS</a>
+		<a href="#" id="calldistanceconversion">DISTANCE</a>
+		<a href="#" id="callspeedconversion">SPEED</a>
 		</center>
+	</div>
+
+	<div class="conversionsectionholder">
+		<div class="massconversionsection">
+			Mass
+		</div>
+		<div class="distanceconversionsection">
+			distance
+		</div>
+		<div class="speedconversionsection">
+			speed
+		</div>
+		
 	</div>
 </div>
 </body>
@@ -133,6 +153,31 @@
 			
 				conform.style.display = "block";
 				localStorage.setItem('conindex', 1);
+
+
+				 	let conSectionCode = localStorage.getItem('conSection');
+	  	let curcontext = localStorage.getItem('conindex');
+
+	  	 if (curcontext == 1) {
+	  	if (conSectionCode == 1) {
+	  		document.querySelector('.massconversionsection').style.display = "block";
+	  	document.querySelector('.distanceconversionsection').style.display = "none";
+	  	document.querySelector('.speedconversionsection').style.display = "none";
+	  }else if(conSectionCode == 2){
+	  	document.querySelector('.massconversionsection').style.display = "none";
+	  	document.querySelector('.distanceconversionsection').style.display = "block";
+	  	document.querySelector('.speedconversionsection').style.display = "none";
+	  }else if(conSectionCode == 3){
+	  		  	document.querySelector('.massconversionsection').style.display = "none";
+	  	document.querySelector('.distanceconversionsection').style.display = "none";
+	  	document.querySelector('.speedconversionsection').style.display = "block";
+	  }else{
+
+	  }
+	}else{
+			let conform = document.getElementById('conversiondiv');
+			conform.style.display = "none";
+	}
 		})
 
 	}
@@ -160,5 +205,67 @@
 		})
 
 	}
+
+	 let callmass = document.getElementById('callmassconversion');
+	  callmass.addEventListener('click' , () =>{
+
+	  	document.querySelector('.massconversionsection').style.display = "block";
+	  	document.querySelector('.distanceconversionsection').style.display = "none";
+	  	document.querySelector('.speedconversionsection').style.display = "none";
+	  	 localStorage.setItem('conSection', 1);
+	  })
+
+
+	   let calldistance = document.getElementById('calldistanceconversion');
+	  calldistance.addEventListener('click' , () =>{
+
+	  	document.querySelector('.massconversionsection').style.display = "none";
+	  	document.querySelector('.distanceconversionsection').style.display = "block";
+	  	document.querySelector('.speedconversionsection').style.display = "none";
+	  	localStorage.setItem('conSection', 2);
+	  })
+
+
+	   let callspeed = document.getElementById('callspeedconversion');
+	  callspeed.addEventListener('click' , () =>{
+
+	  	document.querySelector('.massconversionsection').style.display = "none";
+	  	document.querySelector('.distanceconversionsection').style.display = "none";
+	  	document.querySelector('.speedconversionsection').style.display = "block";
+	  	localStorage.setItem('conSection', 3);
+	  })
+
+	  // retain any called conversion section 
+
+	  (function retainConSecton () {
+	  	// body...
+	  	
+	  	let conSectionCode = localStorage.getItem('conSection');
+	  	let curcontext = localStorage.getItem('conindex');
+
+	  	 if (curcontext == 1) {
+	  	if (conSectionCode == 1) {
+	  		document.querySelector('.massconversionsection').style.display = "block";
+	  	document.querySelector('.distanceconversionsection').style.display = "none";
+	  	document.querySelector('.speedconversionsection').style.display = "none";
+	  }else if(conSectionCode == 2){
+	  	document.querySelector('.massconversionsection').style.display = "none";
+	  	document.querySelector('.distanceconversionsection').style.display = "block";
+	  	document.querySelector('.speedconversionsection').style.display = "none";
+	  }else if(conSectionCode == 3){
+	  		  	document.querySelector('.massconversionsection').style.display = "none";
+	  	document.querySelector('.distanceconversionsection').style.display = "none";
+	  	document.querySelector('.speedconversionsection').style.display = "block";
+	  }else{
+
+	  }
+	}else{
+			let conform = document.getElementById('conversiondiv');
+			conform.style.display = "none";
+	}
+
+
+	  }())
+
 </script>
 </html>
